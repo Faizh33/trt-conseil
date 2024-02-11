@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
+
+body {
+    background-color: white;
+}
+
+.header-title {
+    font-size: 40px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-family: 'Aclonica';
+}
+
+/* Footer style */
+.footer {
+    font-style: italic;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.footer-text {
+    text-align: center;
+}
+
+.footer-ul {
+    list-style: none;
+    text-align: center;
+}
+
+.footer-li {
+    text-align: center;
+    display: inline;
+    margin-right: 40px;
+}
