@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TRT Conseil - Se connecter{% endblock %}
+
+{% block body %}
+<form class="form" method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+
+    <h1 class="form-title">Connectez-vous</h1>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control form-input" autocomplete="email" placeholder="Email" required autofocus>
+    <input type="password" name="password" id="inputPassword" class="form-control form-input" autocomplete="current-password" placeholder="Mot de Passe" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    <button class="form-btn" type="submit">
+        Je me connecte
+    </button>
+</form>
+<p class="text">
+    Vous débutez sur TRT?<br>
+    <a href="" class="text-link">Créez votre profil</a>
+</p>
+{% endblock %}
