@@ -23,8 +23,11 @@ class UserType extends AbstractType
                     'Candidat' => 'ROLE_CANDIDATE',
                     'Recruteur' => 'ROLE_RECRUITER',
                 ],
-                'expanded' => true,
-                'multiple' => false,
+                'expanded' => false,
+                'multiple' => true,
+                'choice_value' => function ($choice) {
+                    return $choice;
+                },
                 'choice_attr' => function ($choice, $key, $value) {
                     return ['class' => 'form-radio-input'];
                 },
