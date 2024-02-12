@@ -43,18 +43,17 @@ class AccountController extends AbstractController
                     )
                 );
     
-                // Convertir la valeur du champ roles en tableau
-                $roles = $form->get('roles')->getData();
-                if (!is_array($roles)) {
-                    $roles = [$roles];
-                }
-                $user->setRoles($roles);
+                $selectedRole = $form->get('roles')->getData();
+                if ($selectedRole === 'ROLE_CANDIDATE') {
+                    $user->setRoles(['ROLE_CANDIDATE']);
+                } elseif ($selectedRole === 'ROLE_RECRUITER') {
+                    $user->setRoles(['ROLE_RECRUITER']);
+                } 
 
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
                 
-                $this->addFlash('success', "Votre compte a été créé avec succès.");
-
+                $this->addFlash('success', 'Votre compte a été créé avec succès.');
                 return $this->redirectToRoute('login');
             }
         } elseif ($form->isSubmitted() && !$form->isValid()) {

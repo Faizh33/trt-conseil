@@ -9,7 +9,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    #[Route(path: '/', name: 'app_login')]
+    #[Route(path: '/', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
                 case 'ROLE_CANDIDATE':
                     return $this->redirectToRoute('candidate_dashboard');
                 default:
-                    return $this->redirectToRoute('app_login');
+                    return $this->redirectToRoute('login');
             }
         }
 

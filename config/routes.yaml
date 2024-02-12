@@ -4,6 +4,10 @@ controllers:
         namespace: App\Controller
     type: attribute
 
+login:
+    path: /
+    controller: App\Controller\SecurityController::login
+
 account:
     path: /creer-un-compte
     controller: App\Controller\AccountController::index
