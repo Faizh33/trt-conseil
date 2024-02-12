@@ -8,3 +8,18 @@ account:
     path: /creer-un-compte
     controller: App\Controller\AccountController::index
 
+candidate_dashboard:
+    path: /candidat/tableau-de-bord
+    controller: App\Controller\CandidateDashboardController::index
+
+candidate_profile:
+    path: /candidat/mon-profil
+    controller: App\Controller\CandidateProfileController::index
+
+candidate_advertisements:
+    path: /candidat/annonces
+    controller: App\Controller\CandidateAdvertisementsController::index
+
+candidate_advertisements_details:
+    path: /candidat/annonces/{title}
+    controller: App\Controller\CandidateAdvertisementsController::index
