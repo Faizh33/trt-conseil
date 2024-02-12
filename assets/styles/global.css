@@ -52,6 +52,10 @@ body {
     background-color: white;
 }
 
+.label {
+    display: none;
+}
+
 /* Footer style */
 .footer {
     font-style: italic;
