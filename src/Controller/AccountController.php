@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AccountController extends AbstractController
 {
@@ -20,7 +21,7 @@ class AccountController extends AbstractController
     }
 
     #[Route('/creer-un-compte', name: 'account')]
-    public function index(Request $request): Response
+    public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User;
         $form = $this->createForm(UserType::class, $user);
@@ -28,19 +29,34 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Convertir la valeur du champ roles en tableau
-            $roles = $form->get('roles')->getData();
-            if (!is_array($roles)) {
-                $roles = [$roles];
+            // Vérifier si l'email existe déjà en base de données
+            $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
+            if ($existingUser) {
+                // Ajouter un message d'erreur
+                $this->addFlash('error', 'Cet email existe déjà en base de données.');
+            } else {
+                // Si l'email n'existe pas, continuer avec la persistance de l'utilisateur
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+    
+                // Convertir la valeur du champ roles en tableau
+                $roles = $form->get('roles')->getData();
+                if (!is_array($roles)) {
+                    $roles = [$roles];
+                }
+                $user->setRoles($roles);
+
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+                
+                $this->addFlash('success', "Votre compte a été créé avec succès.");
+
+                return $this->redirectToRoute('login');
             }
-            $user->setRoles($roles);
-
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
-
-            $this->addFlash('success', "Votre compte a été créé avec succès.");
-
-            return $this->redirectToRoute('login');
         } elseif ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('error', 'Il y a des erreurs dans le formulaire. Veuillez le corriger.');
         }
