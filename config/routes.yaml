@@ -38,7 +38,7 @@ recruiter_profile:
 
 recruiter_new_jobposting:
     path: /recruteur/nouvelle-annonce
-    controller: App\Controller\RecruiterNewJobPostingsController::index
+    controller: App\Controller\RecruiterNewJobPostingController::index
 
 recruiter_jobpostings_and_candidates:
     path: /recruteur/annonces-et-candidats/{title}
