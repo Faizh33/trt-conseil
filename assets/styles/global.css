@@ -98,6 +98,13 @@ input[type="file"] {
     display: none;
 }
 
+/* Style des liens */
+.link {
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+
 /* Dashboards style */
 .dashboard-container {
     width: 100%;
@@ -120,13 +127,24 @@ input[type="file"] {
     padding: 10px;
 }
 
-/* Style des liens */
-.link {
-    text-decoration: none;
+.dashboard-link {
     font-size: 30px;
-    text-align: center;
-    color: black;
 }
+
+
+/* Style des boutons de retour */
+.return-button {
+    text-align: center;
+    margin: 100px auto;
+}
+
+.return-button-link {
+    border: 10px solid #C8F4D0;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+}
+
 
 /* Footer style */
 .footer {
