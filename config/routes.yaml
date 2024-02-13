@@ -20,13 +20,13 @@ candidate_profile:
     path: /candidat/mon-profil
     controller: App\Controller\CandidateProfileController::index
 
-candidate_advertisements:
+candidate_jobpostings:
     path: /candidat/annonces
-    controller: App\Controller\CandidateAdvertisementsController::index
+    controller: App\Controller\CandidateJobPostingsController::index
 
-candidate_advertisements_details:
+candidate_jobpostings_details:
     path: /candidat/annonces/{title}
-    controller: App\Controller\CandidateAdvertisementsController::index
+    controller: App\Controller\CandidateJobPostingsController::index
 
 recruiter_dashboard:
     path: /recruteur/tableau-de-bord
@@ -36,10 +36,10 @@ recruiter_profile:
     path: /recruteur/mon-profil
     controller: App\Controller\RecruiterProfileController::index
 
-recruiter_new_advertisement:
+recruiter_new_jobposting:
     path: /recruteur/nouvelle-annonce
-    controller: App\Controller\RecruiterNewAdvertisementController::index
+    controller: App\Controller\RecruiterNewJobPostingsController::index
 
-recruiter_advertisements_and_candidates:
+recruiter_jobpostings_and_candidates:
     path: /recruteur/annonces-et-candidats/{title}
-    controller: App\Controller\RecruiterAdvertisementsAndCandidatesController::index
+    controller: App\Controller\RecruiterJobPostingsAndCandidatesController::index
