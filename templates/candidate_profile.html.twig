@@ -3,11 +3,14 @@
 {% block title %}Edition du profil - Candidat{% endblock %}
 
 {% block body %}
-    {{ form_start(form, {'attr': {'class': 'form', 'id': 'candidate-profile-form', 'style':'margin-bottom:20vh;'}}) }}
+    {{ form_start(form, {'attr': {'class': 'form', 'id': 'candidate-profile-form', 'style':'margin-bottom:12vh;'}}) }}
         <h1 class="form-title">Renseignez votre profil</h1>
         {% for field in form %}
             {{ form_row(field) }}
         {% endfor %}
         <input type="submit" class="button form-btn" value="Ajouter mon CV" />
     {{ form_end(form) }}
+    <div class="return-button">
+        <a href="{{ path('candidate_dashboard') }}" class="link return-button-link">Retour au tableau de bord</a>
+    </div>
 {% endblock %}
