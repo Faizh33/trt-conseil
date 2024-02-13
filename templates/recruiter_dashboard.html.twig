@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord du recruteur{% endblock %}
+
+{% block body %}
+    <h1 class="main-title">Bienvenue sur votre tableau de bord 
+        {% if app.user %}
+            {{ app.user.firstName }} {{ app.user.lastName }}.
+        {% endif %}
+    </h1>
+    <div class="dashboard-container">
+        <div class="dashboard-button">
+            <a href={{ path('recruiter_profile') }} class="link dashboard-link">Créez / Modifier votre profil</a>
+        </div>
+        <div class="dashboard-button">
+            <a href="" class="link dashboard-link">Nouvelle annonce</a>
+        </div>
+        <div class="dashboard-button">
+            <a href="" class="link  dashboard-link">Annonces postées<br>&<br>postulants</a>
+        </div>
+{% endblock %}
