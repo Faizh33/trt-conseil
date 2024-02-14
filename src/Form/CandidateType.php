@@ -25,7 +25,7 @@ class CandidateType extends AbstractType
                     'accept' => '.pdf',
                 ],
                 'row_attr' => [
-                    'class' => 'cv-upload-container',
+                    'class' => 'upload-container',
                 ],
             ])
             ->add('userId', HiddenType::class, [
