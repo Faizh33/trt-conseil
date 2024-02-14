@@ -30,11 +30,17 @@ class Recruiter
     #[ORM\Column(length: 100)]
     private ?string $region = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $logoName = null;
+
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $userId = null;
 
     #[ORM\OneToMany(targetEntity: JobPosting::class, mappedBy: 'recruiterId')]
     private Collection $jobPostings;
+
+    #[ORM\OneToOne(inversedBy: 'recruiter', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -106,6 +112,18 @@ class Recruiter
         return $this;
     }
 
+    public function getLogoName(): ?string
+    {
+        return $this->logoName;
+    }
+
+    public function setLogoName(string $logoName): static
+    {
+        $this->logoName = $logoName;
+
+        return $this;
+    }
+
     public function getUserId(): ?User
     {
         return $this->userId;
@@ -144,6 +162,18 @@ class Recruiter
                 $jobPosting->setRecruiterId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
