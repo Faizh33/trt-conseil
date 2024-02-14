@@ -33,9 +33,6 @@ class Recruiter
     #[ORM\Column(length: 255)]
     private ?string $logoName = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?User $userId = null;
-
     #[ORM\OneToMany(targetEntity: JobPosting::class, mappedBy: 'recruiterId')]
     private Collection $jobPostings;
 
@@ -120,18 +117,6 @@ class Recruiter
     public function setLogoName(string $logoName): static
     {
         $this->logoName = $logoName;
-
-        return $this;
-    }
-
-    public function getUserId(): ?User
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(?User $userId): static
-    {
-        $this->userId = $userId;
 
         return $this;
     }
