@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Recruiter;
 use App\Form\RecruiterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class RecruiterProfileController extends AbstractController
@@ -27,6 +29,17 @@ class RecruiterProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $logo = $form['logoName']->getData();
+            if ($logo instanceof UploadedFile) {
+                $fileName = md5(uniqid()) . '.' . $logo->guessExtension();
+                $logo->move(
+                    $this->getParameter('pictures_directory'),
+                    $fileName
+                );
+                $recruiter = new Recruiter();
+                $recruiter->setLogoName($fileName);
+            }
+
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
