@@ -4,13 +4,14 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Recruiter;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class RecruiterType extends AbstractType
@@ -73,6 +74,17 @@ class RecruiterType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('logoName', FileType::class, [
+                'label' => 'Insérez votre logo',
+                'label_attr' => ['class' => 'label-file'],
+                'attr' => [
+                    'class' => 'input-file', 'id' => 'input-file', 'required' => 'required',
+                    'accept' => '.png, .jpg',
+                ],
+                'row_attr' => [
+                    'class' => 'upload-container',
+                ],
+            ])     
             ->add('userId', HiddenType::class, [
                 'data' => $user->getId(),
             ])
