@@ -24,7 +24,9 @@ class RecruiterProfileController extends AbstractController
     public function index(Request $request): Response
     {
         $user = $this->getUser();
-        $form = $this->createForm(RecruiterType::class, null, ['user' => $user]);
+        $recruiter = new Recruiter();
+
+        $form = $this->createForm(RecruiterType::class, $recruiter, ['user' => $user]);
 
         $form->handleRequest($request);
 
@@ -36,11 +38,9 @@ class RecruiterProfileController extends AbstractController
                     $this->getParameter('pictures_directory'),
                     $fileName
                 );
-                $recruiter = new Recruiter();
                 $recruiter->setLogoName($fileName);
             }
 
-            $this->entityManager->persist($user);
             $this->entityManager->flush();
 
             $this->addFlash('success', "Votre profil a été mis à jour avec succès.");
