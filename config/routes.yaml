@@ -12,6 +12,18 @@ account:
     path: /creer-un-compte
     controller: App\Controller\AccountController::index
 
+admin_dashboard:
+    path: /admin/tableau-de-bord
+    controller: App\Controller\AdminDashboardController::index
+
+admin_new_consultant:
+    path: /admin/nouveau-consultant
+    controller: App\Controller\AdminNewConsultantController::index
+
+consultant_dashboard:
+    path: /consultant/tableau-de-bord
+    controller: App\Controller\ConsultantDashboardController::index
+
 candidate_dashboard:
     path: /candidat/tableau-de-bord
     controller: App\Controller\CandidateDashboardController::index
