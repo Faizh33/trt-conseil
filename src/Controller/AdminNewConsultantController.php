@@ -24,7 +24,10 @@ class AdminNewConsultantController extends AbstractController
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User;
-        $form = $this->createForm(UserType::class, $user);
+        $showRoleField = false;
+        $form = $this->createForm(UserType::class, $user, [
+            'show_role_field' => $showRoleField,
+        ]);
 
         $form->handleRequest($request);
 
