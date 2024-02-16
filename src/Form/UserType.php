@@ -15,8 +15,8 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('roles', ChoiceType::class, [
+        if ($options['show_role_field']) {
+            $builder->add('roles', ChoiceType::class, [
                 'label' => 'Rôles',
                 'label_attr' => ['class' => 'label'],
                 'choices' => [
@@ -31,9 +31,11 @@ class UserType extends AbstractType
                 'choice_attr' => function ($choice, $key, $value) {
                     return ['class' => 'form-radio-input'];
                 },
-                
                 'attr' => ['class' => 'form-radio', 'id' => 'role', 'required' => 'required'],
-            ])
+            ]);
+        };
+
+        $builder
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'label_attr' => ['class' => 'label'],
@@ -65,6 +67,9 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'show_role_field' => true,
         ]);
+
+        $resolver->setAllowedTypes('show_role_field', 'bool');
     }
 }
