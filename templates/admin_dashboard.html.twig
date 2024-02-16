@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord de l'administrateur{% endblock %}
+
+{% block body %}
+    <h1 class="main-title">Bienvenue sur votre tableau de bord 
+        {% if app.user %}
+            {{ app.user.firstName }} {{ app.user.lastName }}.
+        {% endif %}
+    </h1>
+    <div class="dashboard-container row">
+        <div class="dashboard-button col-md-6 col-12">
+            <a href={{ path('') }} class="link dashboard-link">Ajouter un consultant</a>
+        </div>
+        <div class="dashboard-button col-md-6 col-12">
+            <a href={{ path('') }} class="link dashboard-link">Tableau de bord consultant</a>
+        </div>
+        <div class="dashboard-button col-md-6 col-12">
+            <a href={{ path('') }} class="link dashboard-link">Tableau de bord recruteur</a>
+        </div>
+        <div class="dashboard-button col-md-6 col-12">
+            <a href={{ path('') }} class="link dashboard-link">Tableau de bord candidat</a>
+        </div>
+    </div>
+{% endblock %}
