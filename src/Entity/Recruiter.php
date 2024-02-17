@@ -6,14 +6,16 @@ use App\Repository\RecruiterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\UuidV6 as Uuid;
 
 #[ORM\Entity(repositoryClass: RecruiterRepository::class)]
 class Recruiter
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private ?Uuid $id = null;
 
     #[ORM\Column(length: 100)]
     private ?string $enterpriseName = null;
@@ -33,7 +35,7 @@ class Recruiter
     #[ORM\Column(length: 255)]
     private ?string $logoName = null;
 
-    #[ORM\OneToMany(targetEntity: JobPosting::class, mappedBy: 'recruiterId')]
+    #[ORM\OneToMany(targetEntity: JobPosting::class, mappedBy: 'recruiter')]
     private Collection $jobPostings;
 
     #[ORM\OneToOne(inversedBy: 'recruiter', cascade: ['persist', 'remove'])]
@@ -44,7 +46,7 @@ class Recruiter
         $this->jobPostings = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?Uuid
     {
         return $this->id;
     }
@@ -133,7 +135,7 @@ class Recruiter
     {
         if (!$this->jobPostings->contains($jobPosting)) {
             $this->jobPostings->add($jobPosting);
-            $jobPosting->setRecruiterId($this);
+            $jobPosting->setRecruiter($this);
         }
 
         return $this;
@@ -143,8 +145,8 @@ class Recruiter
     {
         if ($this->jobPostings->removeElement($jobPosting)) {
             // set the owning side to null (unless already changed)
-            if ($jobPosting->getRecruiterId() === $this) {
-                $jobPosting->setRecruiterId(null);
+            if ($jobPosting->getRecruiter() === $this) {
+                $jobPosting->setRecruiter(null);
             }
         }
 
