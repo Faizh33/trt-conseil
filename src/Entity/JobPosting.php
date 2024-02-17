@@ -29,9 +29,9 @@ class JobPosting
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'jobPostings')]
-    private ?Recruiter $recruiterId = null;
+    private ?Recruiter $recruiter = null;
 
-    #[ORM\OneToMany(targetEntity: Contract::class, mappedBy: 'jobPostingId')]
+    #[ORM\OneToMany(targetEntity: Contract::class, mappedBy: 'jobPosting')]
     private Collection $contracts;
 
     public function __construct()
@@ -92,14 +92,14 @@ class JobPosting
         return $this;
     }
 
-    public function getRecruiterId(): ?Recruiter
+    public function getRecruiter(): ?Recruiter
     {
-        return $this->recruiterId;
+        return $this->recruiter;
     }
 
-    public function setRecruiterId(?Recruiter $recruiterId): static
+    public function setRecruiter(?Recruiter $recruiter): static
     {
-        $this->recruiterId = $recruiterId;
+        $this->recruiter = $recruiter;
 
         return $this;
     }
@@ -116,7 +116,7 @@ class JobPosting
     {
         if (!$this->contracts->contains($contract)) {
             $this->contracts->add($contract);
-            $contract->setJobPostingId($this);
+            $contract->setJobPosting($this);
         }
 
         return $this;
@@ -126,8 +126,8 @@ class JobPosting
     {
         if ($this->contracts->removeElement($contract)) {
             // set the owning side to null (unless already changed)
-            if ($contract->getJobPostingId() === $this) {
-                $contract->setJobPostingId(null);
+            if ($contract->getJobPosting() === $this) {
+                $contract->setJobPosting(null);
             }
         }
 

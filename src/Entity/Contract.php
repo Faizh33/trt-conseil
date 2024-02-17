@@ -17,7 +17,7 @@ class Contract
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'contracts')]
-    private ?JobPosting $jobPostingId = null;
+    private ?JobPosting $jobPosting = null;
 
     public function getId(): ?int
     {
@@ -36,14 +36,14 @@ class Contract
         return $this;
     }
 
-    public function getJobPostingId(): ?JobPosting
+    public function getJobPosting(): ?JobPosting
     {
-        return $this->jobPostingId;
+        return $this->jobPosting;
     }
 
-    public function setJobPostingId(?JobPosting $jobPostingId): static
+    public function setJobPosting(?JobPosting $jobPosting): static
     {
-        $this->jobPostingId = $jobPostingId;
+        $this->jobPosting = $jobPosting;
 
         return $this;
     }
