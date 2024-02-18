@@ -85,7 +85,7 @@ class RecruiterType extends AbstractType
                     'class' => 'upload-container',
                 ],
             ])     
-            ->add('userId', HiddenType::class, [
+            ->add('user', HiddenType::class, [
                 'data' => $user->getId(),
             ])
         ;
