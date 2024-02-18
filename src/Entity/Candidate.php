@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CandidateRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\UuidV6 as Uuid;
+use Symfony\Component\Uid\UuidV7 as Uuid;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
 class Candidate
